@@ -1,0 +1,78 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "MRC-API",
+        "description": "API pour la prédiction des maladies rénales chroniques",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/predict": {
+            "post": {
+                "tags": [
+                    "Prédiction"
+                ],
+                "summary": "Prédire le stade de la maladie rénale chronique",
+                "operationId": "f0813c1be46a004e1df5fd7817417036",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "creatinine",
+                                    "gfr",
+                                    "albumin"
+                                ],
+                                "properties": {
+                                    "creatinine": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 1.5
+                                    },
+                                    "gfr": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 50
+                                    },
+                                    "albumin": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 200
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Prédiction réussie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "predicted_stage": {
+                                            "type": "string",
+                                            "example": "Stade 3a - Insuffisance rénale modérée"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Données invalides"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Prédiction",
+            "description": "Prédiction"
+        }
+    ]
+}
